@@ -1,0 +1,38 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>assets/fonts/fontawesome.otf</file>
+        <file>qml/components/AppIcon.qml</file>
+        <file>qml/views/MainView.qml</file>
+        <file>qml/views/TopNavBarView.qml</file>
+        <file>qml/views/GraphsView.qml</file>
+        <file>qml/views/AnalysisView.qml</file>
+        <file>qml/js/script.js</file>
+        <file>qml/components/GraphWidget.qml</file>
+        <file>qml/components/UserNamePopup.qml</file>
+        <file>qml/components/MenuButton.qml</file>
+        <file>assets/images/user-popup-dark.png</file>
+        <file>assets/images/user-popup-light.png</file>
+        <file>qml/views/UserView.qml</file>
+        <file>qml/views/NormalView.qml</file>
+        <file>qml/components/VitalWidget.qml</file>
+        <file>qml/components/RoundProgressbar.qml</file>
+        <file>qml/components/BabyStatusPopup.qml</file>
+        <file>qml/components/SettingsWidget.qml</file>
+        <file>qml/components/SettingsPopup.qml</file>
+        <file>assets/images/mother-baby-dark.png</file>
+        <file>assets/images/mother-baby-light.png</file>
+        <file>qml/components/PropabilityProgressBar.qml</file>
+        <file>qml/models/PropabilityModel.qml</file>
+        <file>qml/components/CustomComboBox.qml</file>
+        <file>qml/components/CustomRadioButton.qml</file>
+        <file>qml/views/LoginView.qml</file>
+        <file>qml/views/NewUserView.qml</file>
+        <file>qml/components/LogoutPopup.qml</file>
+        <file>qml/components/AccountItem.qml</file>
+        <file>qml/components/InputPanel.qml</file>
+        <file>qml/components/ClinicCalendar.qml</file>
+        <file>qml/delegates/ClinicalVisitsDelegate.qml</file>
+        <file>qml/views/EcgConnectionView.qml</file>
+    </qresource>
+</RCC>
