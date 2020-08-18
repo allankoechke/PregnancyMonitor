@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QCryptographicHash>
 
+//#include "serialport.h"
+
 class QmlInterface : public QObject
 {
     Q_OBJECT
@@ -18,6 +20,8 @@ signals:
 
 private:
     QString m_password;
+
+    //SerialPort m_serialPort;
 
 };
 

@@ -1,4 +1,4 @@
-QT += quick widgets# virtualkeyboard
+QT += quick widgets serialport
 
 CONFIG += c++11
 
@@ -19,7 +19,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         cpp/qmlinterface.cpp \
+        cpp/serialport.cpp \
         main.cpp
+
+HEADERS += \
+    cpp/qmlinterface.h \
+    cpp/serialport.h
 
 RESOURCES += qml.qrc
 
@@ -32,7 +37,6 @@ QML_DESIGNER_IMPORT_PATH =
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
+
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    cpp/qmlinterface.h
