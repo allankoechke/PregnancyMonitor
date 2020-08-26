@@ -7,7 +7,7 @@ Item {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    RowLayout
+    ColumnLayout
     {
         anchors.fill: parent
         spacing: 3
@@ -20,15 +20,15 @@ Item {
 
         Rectangle
         {
-            Layout.fillHeight: true
-            Layout.preferredWidth: 1
+            Layout.fillWidth: true
+            Layout.preferredHeight: 1
             color: isDarkTheme? "grey":"#53d0ec"
         }
 
         AnalysisView
         {
-            Layout.fillHeight: true
-            Layout.preferredWidth: 0.25*root.width
+            Layout.fillWidth: true
+            Layout.preferredHeight: 0.45*root.height
         }
     }
 }

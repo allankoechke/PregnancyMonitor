@@ -6,6 +6,7 @@ import "../components"
 
 GroupBox
 {
+    Layout.fillHeight: true
     Layout.fillWidth: true
 
     property real vitalValue

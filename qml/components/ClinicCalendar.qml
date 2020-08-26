@@ -108,24 +108,6 @@ Drawer {
                         MouseArea
                         {
                             anchors.fill: parent
-
-                            onWheel: {
-                                if (wheel.angleDelta.y > 0)
-                                {
-                                    scrollView.flickableItem.contentX -= scrollView.scrollSpeed;
-
-                                    if (scrollView.flickableItem.contentX < 0) {
-                                        scrollView.flickableItem.contentX = 0;
-                                    }
-                                } else {
-                                    scrollView.flickableItem.contentX += scrollView.scrollSpeed;
-
-                                    if (scrollView.flickableItem.contentX + scrollView.flickableItem.width > scrollView.flickableItem.contentWidth)
-                                    {
-                                        scrollView.flickableItem.contentX = scrollView.flickableItem.contentWidth -  scrollView.flickableItem.width;
-                                    }
-                                }
-                            }
                         }
                     }
                 }

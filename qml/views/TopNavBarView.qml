@@ -57,6 +57,43 @@ Item {
 
         Rectangle
         {
+            id: startStopMeasuring
+            Layout.fillHeight: true; Layout.rightMargin: 10
+            Layout.topMargin: 5; Layout.bottomMargin: 5
+            Layout.preferredWidth: 170; radius: height/2
+            color: "#19799F"
+
+            RowLayout
+            {
+                anchors.fill: parent
+                anchors.leftMargin: 10; anchors.rightMargin: 10
+
+                Text {
+                    text: QmlInterface.isMeasuring? qsTr("Stop Measuring"):qsTr("Start Measuring")
+                    Layout.leftMargin: 10; Layout.alignment: Qt.AlignLeft|Qt.AlignVCenter
+                    font.pixelSize: 15;
+                    color: darkThemeForeColor
+                }
+
+                AppIcon
+                {
+                    icon: QmlInterface.isMeasuring? "\uf04d":"\uf04b"
+                    size: 15
+                    Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
+                    Layout.rightMargin: 10
+                    color: darkThemeForeColor
+                }
+            }
+
+            MouseArea
+            {
+                anchors.fill: parent
+                onClicked: QmlInterface.isMeasuring = !QmlInterface.isMeasuring
+            }
+        }
+
+        Rectangle
+        {
             id: clinicTimetable
             visible: !isClinicCalendarOpened
             Layout.fillHeight: true; Layout.rightMargin: 10

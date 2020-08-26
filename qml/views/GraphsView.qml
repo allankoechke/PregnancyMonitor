@@ -5,6 +5,28 @@ import "../components"
 Item {
     id: root
 
+    function mapXAxisData(xValue)
+    {
+        return (xValue*6)/30
+    }
+
+    Connections
+    {
+        target: QmlInterface
+
+        function onEmitPlotDataChanged()
+        {
+            var _data = QmlInterface.getChartData();
+
+             ecgGraphWidget.lineSeries.clear()
+
+            for(var i =0; i<_data.length; i++)
+            {
+                ecgGraphWidget.lineSeries.append(mapXAxisData(i), _data[i])
+            }
+        }
+    }
+
     Item
     {
         anchors.fill: parent
@@ -17,13 +39,14 @@ Item {
 
             GraphWidget
             {
+                id: ecgGraphWidget
                 // RA probe
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
             }
 
-            GraphWidget
+            /*GraphWidget
             {
                 // LA probe
                 Layout.fillWidth: true
@@ -37,7 +60,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-            }
+            }*/
         }
     }
 }

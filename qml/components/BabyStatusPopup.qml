@@ -10,6 +10,93 @@ Drawer {
     height: mainApp.height; width: mainApp.width*0.8
     edge: Qt.RightEdge
 
+    property bool isAnalyzing: false
+    property bool isFinishedAnalyzing: false
+
+    function resetApp()
+    {
+        isAnalyzing = false;
+
+        item1.isActive = false;
+        item1.activeIndex = 0;
+
+        item2.isActive = false;
+        item2.activeIndex = 0;
+
+        item3.isActive = false;
+        item3.activeIndex = 0;
+
+        item4.isActive = false;
+        item4.activeIndex = 0;
+    }
+
+    RotationAnimation
+    {
+        target: _icon
+        from: 0; to: 360
+        duration: 2500
+        running: isAnalyzing && !isFinishedAnalyzing
+        loops: RotationAnimation.Infinite
+
+        onStopped: _icon.rotation = 0;
+    }
+
+    Timer
+    {
+        id: stage1
+        interval: 1000
+        repeat: false
+        running: false
+
+        onTriggered: {
+            item1.activeIndex = 2;
+            item2.activeIndex = 1;
+            stage2.running = true;
+        }
+    }
+
+    Timer
+    {
+        id: stage2
+        interval: 3000
+        repeat: false
+        running: false
+
+        onTriggered: {
+            item2.activeIndex = 2;
+            item3.activeIndex = 1;
+            stage3.running = true;
+        }
+    }
+
+    Timer
+    {
+        id: stage3
+        interval: 2000
+        repeat: false
+        running: false;
+
+        onTriggered: {
+            item3.activeIndex = 2;
+            item4.activeIndex = 1;
+
+            stage4.running = true;
+        }
+    }
+
+    Timer
+    {
+        id: stage4
+        interval: 2000
+        repeat: false
+        running: false
+
+        onTriggered: {
+            item4.activeIndex = 2;
+            isFinishedAnalyzing = true;
+        }
+    }
+
     background: Rectangle
     {
         color: isDarkTheme? darkThemeBgColor:lightThemeBgColor
@@ -55,6 +142,71 @@ Drawer {
                             anchors.centerIn: parent
                             source: isDarkTheme? "qrc:/assets/images/mother-baby-light.png":"qrc:/assets/images/mother-baby-dark.png"
                         }
+
+                        Rectangle
+                        {
+                            id: analysisBtn
+                            height: 40;
+                            width: 150; radius: height/2
+                            color: "green"
+
+                            anchors.bottom: parent.bottom
+                            anchors.bottomMargin: -50
+                            anchors.horizontalCenter: parent.horizontalCenter
+
+                            RowLayout
+                            {
+                                anchors.fill: parent
+                                anchors.leftMargin: 10; anchors.rightMargin: 10
+
+                                AppIcon
+                                {
+                                    id: _icon
+                                    icon: isAnalyzing && !isFinishedAnalyzing? "\uf3f4":"\uf04b"
+                                    size: 15
+                                    Layout.alignment: Qt.AlignVCenter|Qt.AlignLeft
+                                    Layout.rightMargin: 10
+                                    color: darkThemeForeColor
+                                }
+
+                                Text {
+                                    text: isAnalyzing && !isFinishedAnalyzing? qsTr("Analyzing ..."):qsTr("Start Analysis")
+                                    Layout.alignment: Qt.AlignRight|Qt.AlignVCenter
+                                    font.pixelSize: 15; Layout.rightMargin: 20
+                                    color: darkThemeForeColor
+                                }
+                            }
+
+                            MouseArea
+                            {
+                                anchors.fill: parent
+
+                                onClicked: {
+                                    if(isFinishedAnalyzing)
+                                    {
+                                        resetApp();
+                                    }
+
+                                    if(!isAnalyzing)
+                                    {
+                                        isAnalyzing = true;
+                                        stage1.running = true;
+
+                                        item1.isActive = true
+                                        item1.activeIndex = 1;
+
+                                        item2.isActive = true
+                                        item2.activeIndex = 0;
+
+                                        item3.isActive = true
+                                        item3.activeIndex = 0;
+
+                                        item4.isActive = true
+                                        item4.activeIndex = 0;
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     GroupBox
@@ -67,22 +219,75 @@ Drawer {
 
 
                         label: Label{
-                            text: qsTr("Status propability")
+                            text: qsTr("Baby & Mother Health Analysis")
                             color: isDarkTheme? darkThemeForeColor:lightThemeForeColor
                             font.pixelSize: 20
                             font.bold: true
                         }
 
-                        GridView{
+                        Item
+                        {
                             anchors.fill: parent
-                            flow: GridView.LeftToRight
-                            model: 4 //PropabilityModel
-                            cellWidth: 100; cellHeight: 140
-                            delegate: Component{
 
-                                PropabilityProgressBar
+
+                            ColumnLayout
+                            {
+                                anchors.fill: parent
+
+                                AnalysisItem
                                 {
+                                    id: item1
+                                    analysisLabel: qsTr("Preparing data ...")
+                                }
 
+                                AnalysisItem
+                                {
+                                    id: item2
+                                    analysisLabel: qsTr("Analyzing the Heartbeats ...")
+                                }
+
+                                AnalysisItem
+                                {
+                                    id: item3
+                                    analysisLabel: qsTr("Analyzing past history ...")
+                                }
+
+                                AnalysisItem
+                                {
+                                    id: item4
+                                    analysisLabel: qsTr("Parsing data to model ...")
+                                }
+
+                                Item
+                                {
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 40
+
+                                    RowLayout
+                                    {
+                                        anchors.centerIn: parent
+
+                                        Text {
+                                            text: qsTr("Baby Status: ")
+                                            color: "white"
+                                        }
+
+                                        Rectangle
+                                        {
+                                            color: "green"
+                                            Layout.preferredHeight: 40
+                                            Layout.preferredWidth: 60
+
+                                            Text {
+                                                text: item4.activeIndex===2? qsTr("OK"):qsTr("---")
+                                                font.pixelSize: 30
+                                                font.bold: true
+                                                color: "white"
+
+                                                anchors.centerIn: parent
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -132,7 +337,8 @@ Drawer {
                             {
                                 anchors.fill: parent
                                 onClicked: {
-                                    close()
+                                    close();
+                                    resetApp();
                                 }
                             }
                         }

@@ -34,5 +34,6 @@
         <file>qml/components/ClinicCalendar.qml</file>
         <file>qml/delegates/ClinicalVisitsDelegate.qml</file>
         <file>qml/views/EcgConnectionView.qml</file>
+        <file>qml/components/AnalysisItem.qml</file>
     </qresource>
 </RCC>

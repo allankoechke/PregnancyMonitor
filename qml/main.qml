@@ -3,7 +3,7 @@ import QtQuick.Window 2.14
 import QtQuick.Layouts 1.3
 import QtQuick.LocalStorage 2.11
 import Qt.labs.settings 1.1
-//import QtQuick.VirtualKeyboard 2.14
+//import QtQuick.VirtualKeyboard 2.14 as Keyboard
 
 import "./views"
 import "./js/script.js" as JsScript
@@ -62,6 +62,7 @@ Window {
 
     Component.onCompleted: {
         initializeDb()
+        QmlInterface.startSerialPort();
     }
 
     onCurrentUserNameChanged: applicationSettings.currentUser = currentUserName
@@ -297,7 +298,7 @@ Window {
         mainView.settingsPopup.open()
     }
 
-    /*InputPanel {
+    /*Keyboard.InputPanel {
         id: inputPanel
         z: 99
         x: 0
