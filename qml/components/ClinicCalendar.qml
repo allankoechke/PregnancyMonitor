@@ -94,13 +94,17 @@ Drawer {
                             anchors.fill: parent
                             orientation: Qt.Horizontal
 
-                            model: 20
+                            model: ClinicalRecordsModels {}
                             delegate: Component{
                                 id: clinicalvisitDelegate
 
                                 ClinicalVisitsDelegate
                                 {
                                     width: 300; height: listView.height*0.8
+
+                                    pending: _pending
+                                    week: _week
+                                    status: _status
                                 }
                             }
                         }

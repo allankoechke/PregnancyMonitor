@@ -44,7 +44,7 @@ Item {
             {
                 id: _icon
                 size: 18
-                color: activeIndex===2 && isActive? "green":"white"
+                color: activeIndex===2 && isActive? "green":!isDarkTheme? "#535353":"white"
                 icon: !isActive? "\uf128":activeIndex===0? "\uf017":activeIndex===1? "\uf110":"\uf058"
 
                 anchors.centerIn: parent
@@ -59,7 +59,7 @@ Item {
             horizontalAlignment: Text.AlignLeft
 
             text: analysisLabel
-            color: "white"
+            color: !isDarkTheme? "#535353":"white"
             font.pixelSize: 18
         }
     }

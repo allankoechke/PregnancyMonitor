@@ -4,6 +4,8 @@ import "../components"
 
 Item {
     property bool pending: true
+    property string status: ""
+    property var week: 0
 
     ColumnLayout
     {
@@ -23,12 +25,12 @@ Item {
                 Rectangle
                 {
                     Layout.preferredHeight: 0.8*topBar.height; Layout.preferredWidth: height
-                    radius: height/2; color: isDarkTheme? "green":"maroon"
+                    radius: height/2; color: "green"
                     Layout.alignment: Qt.AlignVCenter
 
                     AppIcon
                     {
-                        anchors.centerIn: parent; color: isDarkTheme? darkThemeForeColor:lightThemeForeColor
+                        anchors.centerIn: parent; color: isDarkTheme? darkThemeForeColor:"white"
                         size: 20; icon: pending? "\uf110":"\uf00c"
                     }
                 }
@@ -51,6 +53,90 @@ Item {
             {
                 anchors.fill: parent
                 spacing: 5
+
+                Rectangle
+                {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 30
+                    Layout.margins: 5
+
+                    color: isDarkTheme? "grey":"#535353"
+                    radius: 3
+
+                    RowLayout
+                    {
+                        anchors.fill: parent
+                        spacing: 10
+
+                        Text
+                        {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            horizontalAlignment: Text.AlignRight
+                            verticalAlignment: Text.AlignVCenter
+
+                            text: qsTr("Week: ")
+                            font.pixelSize: 15
+                            color: "white"
+                        }
+
+                        Text
+                        {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            horizontalAlignment: Text.AlignLeft
+                            verticalAlignment: Text.AlignVCenter
+
+                            text: week.toString()
+                            font.bold: true
+                            font.pixelSize: 15
+                            color: isDarkTheme? "white":"white"
+                        }
+                    }
+                }
+
+                Rectangle
+                {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.margins: 5
+
+                    color: isDarkTheme? "grey":"#535353"
+                    radius: 3
+
+                    ColumnLayout
+                    {
+                        anchors.fill: parent
+                        anchors.margins: 5
+                        spacing: 10
+
+                        Text
+                        {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 30
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+
+                            text: qsTr("Status: ")
+                            font.pixelSize: 15
+                            color: "white"
+                        }
+
+                        Text
+                        {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            horizontalAlignment: Text.AlignLeft
+                            verticalAlignment: Text.AlignVCenter
+
+                            text: status
+                            font.bold: true
+                            wrapMode: Text.WordWrap
+                            font.pixelSize: 15
+                            color: "white"
+                        }
+                    }
+                }
             }
         }
     }

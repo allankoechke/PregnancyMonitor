@@ -46,7 +46,7 @@ Rectangle {
                         anchors.leftMargin: 10
 
                         Text{
-                            text: previousStackIndex === 0? qsTr("Skip"):qsTr("Back")
+                            text: previousStackIndex === 0? qsTr("Next"):qsTr("Back")
                             font.pixelSize: 18; font.bold: true
                             color: darkThemeForeColor
                             Layout.alignment: Qt.AlignVCenter
@@ -81,6 +81,26 @@ Rectangle {
             Layout.fillHeight: true
 
 
+            Image
+            {
+                height: parent.height
+                width: height*(794/1123)
+                source: "qrc:/assets/images/electrode-placement.png"
+            }
+
+            Text {
+                id: name
+                width: parent.width/2
+                text: qsTr("Place the probes as shown on the image then click 'NEXT'")
+                color: isDarkTheme? "white":"#535353"
+                font.bold: true
+                wrapMode: Text.WordWrap
+                font.pixelSize: 18
+
+                anchors.left: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.topMargin: 50
+            }
         }
     }
 }

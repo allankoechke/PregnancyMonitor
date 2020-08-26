@@ -143,6 +143,7 @@ Item {
             Layout.preferredWidth: 250; radius: height/2
             color: "#19799F"// :"#E08A7B"
             Layout.alignment: Qt.AlignRight
+            visible: QmlInterface.isMeasuring
 
             RowLayout
             {

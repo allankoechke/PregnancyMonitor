@@ -23,7 +23,7 @@
         <file>assets/images/mother-baby-dark.png</file>
         <file>assets/images/mother-baby-light.png</file>
         <file>qml/components/PropabilityProgressBar.qml</file>
-        <file>qml/models/PropabilityModel.qml</file>
+        <file>qml/models/ClinicalRecordsModels.qml</file>
         <file>qml/components/CustomComboBox.qml</file>
         <file>qml/components/CustomRadioButton.qml</file>
         <file>qml/views/LoginView.qml</file>
@@ -35,5 +35,6 @@
         <file>qml/delegates/ClinicalVisitsDelegate.qml</file>
         <file>qml/views/EcgConnectionView.qml</file>
         <file>qml/components/AnalysisItem.qml</file>
+        <file>assets/images/electrode-placement.png</file>
     </qresource>
 </RCC>

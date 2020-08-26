@@ -116,7 +116,7 @@ Drawer {
                     text: qsTr("Baby Health Status")
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     font.pixelSize: 15; font.bold: true
-                    color: isDarkTheme? darkThemeForeColor:lightThemeForeColor
+                    color: isDarkTheme? darkThemeForeColor:"#555555"
                 }
 
                 Rectangle
@@ -269,7 +269,7 @@ Drawer {
 
                                         Text {
                                             text: qsTr("Baby Status: ")
-                                            color: "white"
+                                            color: !isDarkTheme? "#535353":"white"
                                         }
 
                                         Rectangle
