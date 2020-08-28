@@ -4,6 +4,33 @@ SerialPortInterface::SerialPortInterface(QObject *parent) : QObject(parent)
 {
     m_serial_port = new QSerialPort(parent);
 
+    std::fstream afile;
+
+    afile.open(":/out.txt", std::ios::in);
+
+    std::string line;
+
+    qDebug() << "File opened? " << afile.is_open();
+
+    if (afile.is_open())
+    {
+        while ( std::getline (afile,line) )
+        {
+            m_plot_data.append(std::stof(line));
+
+            // qDebug()<<std::stof(line);
+        }
+        afile.close();
+
+        m_array_size = m_plot_data.size();
+    }
+
+    timer =  new QTimer(this);
+
+    connect(timer, &QTimer::timeout, this, &SerialPortInterface::onTimerOverflow);
+
+    timer->start(3);
+
     connect(m_serial_port,&QSerialPort::readyRead,this,&SerialPortInterface::onReadyRead);
 
     connect(m_serial_port,&QSerialPort::errorOccurred,this,&SerialPortInterface::checkIfSerialPortIsConnected);
@@ -78,6 +105,23 @@ void SerialPortInterface::onInitSerializerPort()
     emit startedSerializerPort(initializeSerialPort());
 }
 
+void SerialPortInterface::onTimerOverflow()
+{
+    // qDebug()<<"Here ..." << index;
+
+    if(m_array_size > 0)
+    {
+        emit chartDataRecieved(m_plot_data[index]);
+
+        index ++;
+
+        if(index >= m_array_size)
+        {
+            index = 0;
+        }
+    }
+}
+
 void SerialPortInterface::onSendingData(QVariantList data)
 {
     emit sentData(sendData(data));
@@ -95,18 +139,22 @@ void SerialPortInterface::onReadyRead()
         {
             QStringList segmentedData=d.split(":");
 
+            qDebug()<< d;
+
             if(segmentedData.length()!=0)
             {
                 if(segmentedData.length()==1)
                 {
-                    emit statusDataRecieved(segmentedData.at(0));
+                    //emit statusDataRecieved(segmentedData.at(0));
+                    qDebug() << segmentedData.at(0);
+                    //emit chartDataRecieved(segmentedData.at(0).toFloat());
                 }
 
                 if(segmentedData.length()==2)
                 {
-                    emit heartbeatDataRecieved(segmentedData.at(0).toFloat());
+                    emit heartbeatDataRecieved(segmentedData.at(1).toFloat());
 
-                    emit chartDataRecieved(segmentedData.at(1).toFloat());
+                    //emit chartDataRecieved(segmentedData.at(0).toFloat());
 
                     qDebug()<<"Data: --> "<<segmentedData.at(0).toFloat()<<"\t"<<segmentedData.at(1).toFloat();
                 }

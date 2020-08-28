@@ -9,6 +9,8 @@
 #include <QVariantList>
 #include <QStringList>
 #include <QDateTime>
+#include <fstream>
+#include <QTimer>
 
 class SerialPortInterface : public QObject
 {
@@ -34,6 +36,8 @@ signals:
 public slots:
     void onInitSerializerPort();
 
+    void onTimerOverflow();
+
     void onSendingData(QVariantList data);
 
 private slots:
@@ -51,7 +55,13 @@ private:
 
     QByteArray prepareDataForSending(QVariantList data);
 
-    QList<int> m_plot_data;
+    QList<float> m_plot_data;
+
+    // std::ifstream stream;
+
+    QTimer * timer;
+
+    int m_array_size, index = 0;
 
 };
 

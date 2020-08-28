@@ -1,10 +1,10 @@
-QT += quick widgets serialport virtualkeyboard
+QT += quick widgets serialport# virtualkeyboard
 
 CONFIG += c++11
 
-QT_IM_MODULE = qtvirtualkeyboard
+#QT_IM_MODULE = qtvirtualkeyboard
 
-QTPLUGIN += qtvirtualkeyboardplugin
+#QTPLUGIN += qtvirtualkeyboardplugin
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings

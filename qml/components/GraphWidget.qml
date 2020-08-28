@@ -9,6 +9,9 @@ Item
     property alias yAxis: yAxis
     property alias lineSeries: lineSeries
 
+    property var point_X: 0.0
+    property var point_Y: 0.0
+
     ChartView {
         id: chart
         anchors.fill: parent
@@ -24,8 +27,8 @@ Item
         {
             id: xAxis
             labelsVisible: false
-            min: 0; max: 6
-            tickCount: 30
+            min: 0; max: 20
+            tickCount: 2000
             gridVisible: false
 
         }
@@ -36,7 +39,7 @@ Item
             labelsVisible: false
             tickCount: 5
             gridLineColor: "grey"
-            min: 0; max: 20
+            min: -200; max: 200
 
         }
 
@@ -46,6 +49,10 @@ Item
             axisX: xAxis; axisY: yAxis
             color: isDarkTheme? "orange":"#022F44"
 
+            XYPoint {
+                x: point_X
+                y: point_Y
+            }
         }
     }
 }

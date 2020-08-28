@@ -2,6 +2,8 @@
 
 QmlInterface::QmlInterface(QObject *parent) : QObject(parent)
 {
+    m_plot_x = 0;
+
     m_thread = new QThread(parent);
 
     m_serialPortinterface = new SerialPortInterface(m_thread);
@@ -60,7 +62,11 @@ void QmlInterface::takeMeasurements(bool status)
 
     if(!m_isTakingMeasurents)
     {
-        m_plotData.clear();
+        // m_plotData.clear();
+
+        m_plot_x = 0;
+
+        emit clearChart();
     }
 }
 
@@ -98,14 +104,26 @@ void QmlInterface::onChartDataRecieved(float data)
     if(m_isTakingMeasurents) // If measuring has started
     {
 
-        if(m_plotData.length() == 30)
+        /*if(m_plotData.length() == 30)
         {
             m_plotData.removeFirst();
         }
 
         m_plotData.append(data);
 
-        emit plotDataChanged();
+        emit plotDataChanged();*/
+
+        if(m_plot_x >= 2000)
+        {
+            m_plot_x = 0;
+
+            emit clearChart();
+        }
+
+        else
+            m_plot_x ++;
+
+        emit emitChartData(m_plot_x * 0.01, data);
     }
 }
 

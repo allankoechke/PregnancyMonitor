@@ -18,12 +18,24 @@ Item {
         {
             var _data = QmlInterface.getChartData();
 
-             ecgGraphWidget.lineSeries.clear()
+            ecgGraphWidget.lineSeries.clear()
 
             for(var i =0; i<_data.length; i++)
             {
                 ecgGraphWidget.lineSeries.append(mapXAxisData(i), _data[i])
             }
+        }
+
+        function onEmitChartData(_x, _y)
+        {
+            ecgGraphWidget.lineSeries.append(_x, _y*100);
+
+            console.log(_x + ":" + _y*100);
+        }
+
+        function onClearChart()
+        {
+            ecgGraphWidget.lineSeries.clear();
         }
     }
 

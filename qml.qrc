@@ -36,5 +36,6 @@
         <file>qml/views/EcgConnectionView.qml</file>
         <file>qml/components/AnalysisItem.qml</file>
         <file>assets/images/electrode-placement.png</file>
+        <file>assets/out.txt</file>
     </qresource>
 </RCC>

@@ -20,6 +20,8 @@ public:
 
     Q_PROPERTY(bool isMeasuring MEMBER m_isTakingMeasurents NOTIFY isTakingMeasurentsChanged);
 
+    Q_PROPERTY(float plotX MEMBER m_plot_x);
+
     Q_INVOKABLE QVariant hashPassword(QVariant password);
 
     Q_INVOKABLE void startSerialPort();
@@ -45,6 +47,10 @@ signals:
 
     void emitHeartBeatDataReceived(float data);
 
+    void emitChartData(float x, float data);
+
+    void clearChart();
+
 public  slots:
     void onStatusDataRecieved(QString data);
 
@@ -68,6 +74,8 @@ private:
     bool m_isTakingMeasurents = false;
 
     SerialPortInterface * m_serialPortinterface;
+
+    float m_plot_x;
 
 };
 
