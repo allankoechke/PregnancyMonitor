@@ -6,7 +6,7 @@ SerialPortInterface::SerialPortInterface(QObject *parent) : QObject(parent)
 
     std::fstream afile;
 
-    afile.open(":/out.txt", std::ios::in);
+    afile.open("/home/lalan-ke/Documents/QML/PregnancyMonitor/assets/out.txt", std::ios::in);
 
     std::string line;
 
