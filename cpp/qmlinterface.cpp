@@ -64,6 +64,10 @@ void QmlInterface::takeMeasurements(bool status)
     {
         // m_plotData.clear();
 
+        m_firstOverflow = false;
+
+        qDebug()<<"Measuring stopped ...";
+
         m_plot_x = 0;
 
         emit clearChart();
@@ -115,6 +119,13 @@ void QmlInterface::onChartDataRecieved(float data)
 
         if(m_plot_x >= 2000)
         {
+            if(!m_firstOverflow)
+            {
+                m_firstOverflow = true;
+
+                emit firstOverflow();
+            }
+
             m_plot_x = 0;
 
             emit clearChart();

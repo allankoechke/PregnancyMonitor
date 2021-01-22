@@ -5,6 +5,8 @@ import "../components"
 Item {
     id: root
 
+    property bool hasOverflow: false
+
     function mapXAxisData(xValue)
     {
         return (xValue*6)/30
@@ -36,6 +38,11 @@ Item {
         function onClearChart()
         {
             ecgGraphWidget.lineSeries.clear();
+        }
+
+        function onFirstOverflow()
+        {
+
         }
     }
 

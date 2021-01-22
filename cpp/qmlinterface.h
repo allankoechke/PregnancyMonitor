@@ -51,6 +51,8 @@ signals:
 
     void clearChart();
 
+    void firstOverflow();
+
 public  slots:
     void onStatusDataRecieved(QString data);
 
@@ -76,6 +78,8 @@ private:
     SerialPortInterface * m_serialPortinterface;
 
     float m_plot_x;
+
+    bool m_firstOverflow = true;
 
 };
 
